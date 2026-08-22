@@ -39,9 +39,9 @@ styled to match Discord, with its own green accent color variables.
 ### 1. Install a userscript manager
 
 You need a userscript manager installed in your browser first:
-
+- **[ScriptVault](https://chromewebstore.google.com/detail/scriptvault/jlhdbkeijcbgnonpfkfkkkhfmbeejkgh?hl=en)** (Chrome, Firefox, Edge, Safari, Opera) ![Recommended](https://img.shields.io/badge/Recommended-%E2%9C%94-brightgreen)
 - **[Tampermonkey](https://www.tampermonkey.net/)** (Chrome, Firefox, Edge, Safari, Opera)
-- **[Violentmonkey](https://violentmonkey.github.io/)** (Chrome, Firefox, Edge)
+- **[Violentmonkey](https://violentmonkey.github.io/)** (Chrome, Firefox, Edge) ![Recommended](https://img.shields.io/badge/Recommended-%E2%9C%94-brightgreen)
 - **[Greasemonkey](https://www.greasespot.net/)** (Firefox)
 
 ### 2. Install the script
