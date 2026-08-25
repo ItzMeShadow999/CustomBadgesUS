@@ -4,8 +4,11 @@
 // @version         12.1.0
 // @match           https://discord.com/*
 // @match           https://*.discord.com/*
+// @icon            https://files.catbox.moe/i4wx32.png
 // @grant           none
 // @run-at          document-start
+// @updateURL       https://raw.githubusercontent.com/ItzMeShadow999/CustomBadgesUS/main/CustomBadges.userscript.js
+// @downloadURL     https://raw.githubusercontent.com/ItzMeShadow999/CustomBadgesUS/main/CustomBadges.userscript.js
 // ==/UserScript==
 (function () {
     'use strict';
@@ -514,7 +517,8 @@
             check: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
             trash: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>`,
             plus: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`,
-            shield: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><polyline points="9 12 11 14 15 10"/></svg>`
+            shield: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><polyline points="9 12 11 14 15 10"/></svg>`,
+            clock: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>`
         };
         return `
             <style>
@@ -615,6 +619,50 @@
                     line-height: 1.5;
                     color: var(--ub-text-faint);
                     margin: 0 0 14px;
+                }
+                #ub-dashboard-settings .ub-write-budget-card {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                }
+                #ub-dashboard-settings .ub-write-budget-toprow {
+                    display: flex;
+                    align-items: baseline;
+                    justify-content: space-between;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                }
+                #ub-dashboard-settings .ub-write-budget-count {
+                    font-size: 15px;
+                    font-weight: 600;
+                    color: var(--ub-text-secondary);
+                }
+                #ub-dashboard-settings .ub-write-budget-reset {
+                    font-size: 13px;
+                    font-weight: 500;
+                    color: var(--ub-text-faint);
+                }
+                #ub-dashboard-settings .ub-write-budget-bar {
+                    height: 6px;
+                    border-radius: 999px;
+                    background: var(--ub-bg-input, rgba(255,255,255,0.06));
+                    overflow: hidden;
+                }
+                #ub-dashboard-settings .ub-write-budget-bar-fill {
+                    height: 100%;
+                    border-radius: 999px;
+                    background: var(--ub-positive);
+                    width: 100%;
+                    transition: width 200ms ease, background-color 200ms ease;
+                }
+                #ub-dashboard-settings .ub-write-budget-card.ub-write-budget-exhausted .ub-write-budget-count {
+                    color: var(--ub-warning);
+                }
+                #ub-dashboard-settings .ub-write-budget-card.ub-write-budget-exhausted .ub-write-budget-reset {
+                    color: var(--ub-warning);
+                }
+                #ub-dashboard-settings .ub-write-budget-card.ub-write-budget-exhausted .ub-write-budget-bar-fill {
+                    background: var(--ub-warning);
                 }
                 #ub-dashboard-settings .ub-input,
                 #ub-dashboard-settings .ub-select {
@@ -1654,6 +1702,19 @@
                             </div>
                             <div class="ub-section">
                                 <div class="ub-section-head">
+                                    <div class="ub-section-icon">${icon.clock}</div>
+                                    <div class="ub-eyebrow">Write Budget</div>
+                                </div>
+                                <div id="ub-write-budget-card" class="ub-write-budget-card">
+                                    <div class="ub-write-budget-toprow">
+                                        <span id="ub-write-budget-count" class="ub-write-budget-count">Loading…</span>
+                                    </div>
+                                    <div class="ub-write-budget-bar"><div id="ub-write-budget-bar-fill" class="ub-write-budget-bar-fill" style="width:100%;"></div></div>
+                                    <span id="ub-write-budget-reset" class="ub-write-budget-reset"></span>
+                                </div>
+                            </div>
+                            <div class="ub-section">
+                                <div class="ub-section-head">
                                     <div class="ub-section-icon">${icon.pencil}</div>
                                     <div class="ub-eyebrow">Edit Active Badge</div>
                                     <div id="ub-publish-status" style="margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ub-text-faint);">
@@ -1669,10 +1730,11 @@
                                     <div class="ub-label">My Badge Image Url</div>
                                     <input id="ub-badge-image-url" type="text" class="ub-input" placeholder="https://..." />
                                 </div>
-                                <div class="ub-field" style="margin-bottom: 0;">
+                                <div class="ub-field" style="margin-bottom: 16px;">
                                     <div class="ub-label">My Badge Name</div>
                                     <input id="ub-badge-name" type="text" class="ub-input" placeholder="Your badge name" />
                                 </div>
+                                <button id="ub-apply-badge" class="ub-btn ub-btn-primary" style="margin-bottom: 0; width: 100%;">Apply Badge Changes</button>
                             </div>
                             <div class="ub-section">
                                 <div class="ub-section-head">
@@ -2142,6 +2204,18 @@
         for (let i = tokens.length - 1; i >= 0; i--) {
             if (isLikelyUsername(tokens[i])) return tokens[i].replace(/^@/, "");
         }
+        // Nickname decorations (accents, emoji) and appended status text
+        // ("Do Not Disturb" plus a custom status, etc.) don't use the plain
+        // lowercase/digit/./_ character set a real username does. So even
+        // when nickname + username + status all end up concatenated with no
+        // whitespace between them, the accented/uppercase/emoji characters
+        // around it act as natural boundaries - scanning for that contiguous
+        // run reliably isolates just the handle instead of falling back to
+        // the whole messy string.
+        const runs = out.match(/[a-z0-9._]{2,32}/g) || [];
+        for (const run of runs) {
+            if (isLikelyUsername(run)) return run;
+        }
         return out;
     }
     function getCurrentUser() {
@@ -2453,6 +2527,16 @@
         });
         return parseJsonOrThrow(res);
     }
+    // Read-only peek at the caller's own write budget (server-derived from the
+    // session token - no userId is ever sent, so the client can't ask for
+    // anyone else's budget). Doesn't consume a write.
+    async function apiGetWriteBudget() {
+        const token = requireSessionToken(getSetting("sessionToken"));
+        const res = await fetchWithTimeout(`${apiBase()}/self/writes`, {
+            method: "GET", headers: authHeaders(token)
+        });
+        return parseJsonOrThrow(res);
+    }
     function describeBadgeApiError(e) {
         const message = e instanceof Error ? e.message : String(e);
         const sep = message.indexOf(":");
@@ -2480,7 +2564,7 @@
         if (typeof window.refreshCustomBadges === 'function') window.refreshCustomBadges();
     }
     let lastPublishedSnapshot = null;
-    const AUTO_PUBLISH_DEBOUNCE_MS = 2000;
+    const AUTO_PUBLISH_DEBOUNCE_MS = 700;
     const AUTO_PUBLISH_RETRY_DELAYS_MS = [3000, 8000, 20000, 45000];
     let _autoPublishTimer = null;
     let _autoPublishRetryTimer = null;
@@ -2544,6 +2628,7 @@
         try {
             const res = await apiSetBadge(me.id, badgeId, imageUrl, description, getMyBadgeStyle());
             refreshOwnBadgeDisplay(me.id);
+            applyWriteBudget(res && res.writeBudget);
             log('Badge set:', res);
             return true;
         } catch (e) {
@@ -2600,8 +2685,9 @@
             return;
         }
         try {
-            await apiSetActiveBadge(me.id, id);
+            const res = await apiSetActiveBadge(me.id, id);
             refreshOwnBadgeDisplay(me.id);
+            applyWriteBudget(res && res.writeBudget);
             toast("Switched active badge", { type: "success" });
         } catch (e) {
             log('Failed to switch active badge:', e);
@@ -2632,8 +2718,9 @@
         const me = getCurrentUser();
         if (me) {
             try {
-                await apiDeleteBadge(me.id, id);
+                const res = await apiDeleteBadge(me.id, id);
                 refreshOwnBadgeDisplay(me.id);
+                applyWriteBudget(res && res.writeBudget);
             } catch (e) {
                 log('Failed to delete badge:', e);
                 toast(describeBadgeApiError(e), { type: "error" });
@@ -2668,6 +2755,8 @@
         try {
             await apiRevokeToken();
             setSetting("sessionToken", "");
+            _writeBudgetInfo = null;
+            renderWriteBudget();
             toast("Token revoked - re-verify to publish badge changes again", { type: "success" });
         } catch (e) {
             log('Failed to revoke token:', e);
@@ -2731,12 +2820,90 @@
     let _dashboardBridge = null;
     function setDashboardBridge(b) { _dashboardBridge = b; }
     function getDashboardBridge() { return _dashboardBridge; }
+    // --- Write budget display -------------------------------------------------
+    // Purely a read-side mirror of the server's authoritative WriteBudget DO.
+    // We never derive or decrement this locally - every number shown comes from
+    // either GET /self/writes (peekWriteBudget, no write consumed) or the
+    // `writeBudget` block a successful write response already includes.
+    let _writeBudgetInfo = null; // { remaining, limit, resetAt } | null
+    let _writeBudgetCountdownTimer = null;
+    function formatWriteBudgetDuration(ms) {
+        if (ms <= 0) return "0m";
+        const totalMinutes = Math.ceil(ms / 60000);
+        const h = Math.floor(totalMinutes / 60);
+        const m = totalMinutes % 60;
+        return h > 0 ? `${h}h ${m}m` : `${m}m`;
+    }
+    function renderWriteBudget() {
+        const countEl = document.getElementById("ub-write-budget-count");
+        const resetEl = document.getElementById("ub-write-budget-reset");
+        const cardEl = document.getElementById("ub-write-budget-card");
+        const fillEl = document.getElementById("ub-write-budget-bar-fill");
+        if (!countEl || !resetEl || !cardEl) return; // dashboard not mounted yet
+        if (!getSetting("sessionToken")) {
+            countEl.textContent = "Verify your account to see your write budget";
+            resetEl.textContent = "";
+            cardEl.classList.remove("ub-write-budget-exhausted");
+            if (fillEl) fillEl.style.width = "100%";
+            return;
+        }
+        if (!_writeBudgetInfo) {
+            countEl.textContent = "Loading…";
+            resetEl.textContent = "";
+            return;
+        }
+        const { remaining, limit, resetAt } = _writeBudgetInfo;
+        const safeLimit = limit || 0;
+        const exhausted = remaining <= 0;
+        countEl.textContent = `${remaining} / ${safeLimit} writes remaining`;
+        cardEl.classList.toggle("ub-write-budget-exhausted", exhausted);
+        if (fillEl) fillEl.style.width = `${safeLimit > 0 ? Math.max(0, Math.min(100, (remaining / safeLimit) * 100)) : 100}%`;
+        if (resetAt == null) {
+            // Fresh, never-started window - nothing to count down to.
+            resetEl.textContent = "";
+        } else {
+            const msLeft = resetAt - Date.now();
+            if (msLeft <= 0) {
+                resetEl.textContent = "Refreshing…";
+                fetchWriteBudget();
+            } else {
+                resetEl.textContent = `${exhausted ? "Available again" : "Resets"} in ${formatWriteBudgetDuration(msLeft)}`;
+            }
+        }
+    }
+    function applyWriteBudget(info) {
+        if (!info) return;
+        _writeBudgetInfo = { remaining: info.remaining, limit: info.limit, resetAt: info.resetAt ?? null };
+        renderWriteBudget();
+    }
+    async function fetchWriteBudget() {
+        if (!document.getElementById("ub-write-budget-count")) return; // dashboard not mounted
+        if (!getSetting("sessionToken")) { renderWriteBudget(); return; }
+        try {
+            const data = await apiGetWriteBudget();
+            applyWriteBudget(data);
+        } catch (e) {
+            log("Failed to fetch write budget:", e);
+            // Leave the last known value displayed rather than showing an error
+            // in a spot that's meant to be a quiet status readout.
+        }
+    }
+    function startWriteBudgetCountdown() {
+        if (_writeBudgetCountdownTimer) return;
+        _writeBudgetCountdownTimer = setInterval(() => {
+            if (_writeBudgetInfo && _writeBudgetInfo.resetAt != null) renderWriteBudget();
+        }, 30000);
+    }
+    function stopWriteBudgetCountdown() {
+        if (_writeBudgetCountdownTimer) { clearInterval(_writeBudgetCountdownTimer); _writeBudgetCountdownTimer = null; }
+    }
     let _dashboardActive = false;
     function setDashboardActive(active) { _dashboardActive = active; }
     let _dashboardOverlay = null;
     function closeDashboard() {
         setDashboardActive(false);
         if (_dashboardOverlay) _dashboardOverlay.style.display = 'none';
+        stopWriteBudgetCountdown();
     }
     function mountDashboard() {
         const overlay = document.createElement('div');
@@ -2748,6 +2915,9 @@
             if (e.key === 'Escape' && _dashboardActive) closeDashboard();
         });
         wireDashboardSettings(overlay);
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && _dashboardActive) fetchWriteBudget();
+        });
         _dashboardOverlay = overlay;
         return overlay;
     }
@@ -2755,6 +2925,9 @@
         setDashboardActive(true);
         const overlay = _dashboardOverlay || mountDashboard();
         overlay.style.display = 'flex';
+        renderWriteBudget();
+        fetchWriteBudget();
+        startWriteBudgetCountdown();
     }
     function initDashboard() {
         setDashboardBridge({
@@ -2772,6 +2945,7 @@
             browsePacks: () => browsePacks(),
             onBadgeModeChange: () => { },
             publishBadge: () => scheduleAutoPublish(),
+            applyBadgeNow: () => scheduleAutoPublish(0),
             onPublishStatusChange: fn => onPublishStatusChange(fn),
             verifyAccount: () => verifyDiscordAccount(),
             revokeSessionToken: () => revokeSessionToken(),
@@ -3427,6 +3601,20 @@
             updatePreview();
             bridge.publishBadge();
         });
+        const applyBadgeBtn = $("ub-apply-badge");
+        applyBadgeBtn?.addEventListener("click", async () => {
+            if (applyBadgeBtn.disabled) return;
+            applyBadgeBtn.disabled = true;
+            const originalLabel = applyBadgeBtn.textContent;
+            applyBadgeBtn.textContent = "Applying...";
+            try {
+                await bridge.applyBadgeNow();
+            }
+            finally {
+                applyBadgeBtn.disabled = false;
+                applyBadgeBtn.textContent = originalLabel;
+            }
+        });
         $("ub-share-badge")?.addEventListener("click", () => bridge.shareMyBadge());
         $("ub-revert-badge")?.addEventListener("click", () => {
             bridge.revertBadge();
@@ -3466,6 +3654,7 @@
             settings.store.sessionToken = sessionToken.value;
             if (revokeTokenBtn)
                 revokeTokenBtn.disabled = !settings.store.sessionToken;
+            fetchWriteBudget();
         });
         selfUserId?.addEventListener("change", () => {
             const val = selfUserId.value.trim();
