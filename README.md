@@ -2,20 +2,20 @@
 
 <img src="https://files.catbox.moe/o5dhdh.png" alt="Custom Badges logo" width="200" />
 
-# Custom Badges — Userscript
+# Custom Badges — UserScript
 
-[![Userscript](https://img.shields.io/badge/Userscript-Tampermonkey%20%2F%20Violentmonkey-1E9E56?style=for-the-badge&logo=tampermonkey&logoColor=fff&labelColor=1B3B2A)](https://www.tampermonkey.net/)
+[![UserScript](https://img.shields.io/badge/UserScript-Tampermonkey%20%2F%20Violentmonkey-1E9E56?style=for-the-badge&logo=tampermonkey&logoColor=fff&labelColor=1B3B2A)](https://www.tampermonkey.net/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-2E8B57?style=for-the-badge&labelColor=15291D&logoColor=fff)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Cloudflare Workers](https://img.shields.io/badge/Backend-Cloudflare%20Workers-F38020?style=for-the-badge&logo=cloudflare&logoColor=fff&labelColor=1B3B2A)](https://workers.cloudflare.com/)
 [![Discord Server](https://img.shields.io/badge/Discord-Join%20Server-2E8B57?style=for-the-badge&logo=discord&logoColor=fff&labelColor=1B3B2A)](https://discord.gg/PUYaka9Hy8)
 
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=323330&labelColor=15291D)
-![Single File](https://img.shields.io/badge/Format-Single%20File%20Userscript-6FA98A?style=flat&labelColor=15291D&color=6FA98A)
+![Single File](https://img.shields.io/badge/Format-Single%20File%20UserScript-6FA98A?style=flat&labelColor=15291D&color=6FA98A)
 ![Third-Party](https://img.shields.io/badge/Third--Party-Not%20affiliated%20with%20Discord-4C7A63?style=flat&labelColor=15291D&color=4C7A63)
 ![Status](https://img.shields.io/badge/Status-Active-3BA55D?style=flat&labelColor=15291D&logoColor=fff)
 </div>
 
-A userscript that gives you a custom profile badge  image, description,
+A UserScript that gives you a custom profile badge  image, description,
 hover tooltip, and click popup card  visible to anyone else running the
 script. It injects its own in-page **Dashboard** directly into Discord,
 covering badge slots, presets, importable/exportable badge packs, and a
@@ -33,12 +33,25 @@ styled to match Discord, with its own green accent color variables.
 
 ---
 
+## <img src="https://raw.githubusercontent.com/ItzMeShadow999/My-assets/main/download-icon-green.png" width="30" height="30" align="absmiddle" /> $\color{#2E8B57}\textsf{Quick Install}$
+
+1. Install a UserScript manager: **[ScriptVault](https://chromewebstore.google.com/detail/scriptvault/jlhdbkeijcbgnonpfkfkkkhfmbeejkgh?hl=en)**, **[Tampermonkey](https://www.tampermonkey.net/)** or **[Violentmonkey](https://violentmonkey.github.io/)**.
+2. Click the link below. Your UserScript manager picks it up automatically and asks you to install it.
+
+   **[Install CustomBadges UserScript](https://raw.githubusercontent.com/ItzMeShadow999/CustomBadgesUS/main/CustomBadges.userscript.js)**
+
+3. Click **Install** in the prompt, then refresh Discord (`Ctrl/Cmd + R`).
+
+If no install prompt shows up, follow the manual steps below.
+
+---
+
 <details>
 <summary><img src="https://files.catbox.moe/jhnu1h.png" width="30" height="30" align="absmiddle" /> $\Huge{\color{#2E8B57}\textsf{Installation (click to expand)}}$</summary>
 
-### 1. Install a userscript manager
+### 1. Install a UserScript manager
 
-You need a userscript manager installed in your browser first:
+You need a UserScript manager installed in your browser first:
 - **[ScriptVault](https://chromewebstore.google.com/detail/scriptvault/jlhdbkeijcbgnonpfkfkkkhfmbeejkgh?hl=en)** (Chrome, Firefox, Edge, Safari, Opera) ![Recommended](https://img.shields.io/badge/Recommended-%E2%9C%94-brightgreen)
 - **[Tampermonkey](https://www.tampermonkey.net/)** (Chrome, Firefox, Edge, Safari, Opera)
 - **[Violentmonkey](https://violentmonkey.github.io/)** (Chrome, Firefox, Edge) ![Recommended](https://img.shields.io/badge/Recommended-%E2%9C%94-brightgreen)
@@ -46,14 +59,14 @@ You need a userscript manager installed in your browser first:
 
 ### 2. Install the script
 
-Open `CustomBadges_userscript.js`, your userscript manager should detect it
+Open `CustomBadges.userscript.js`, your UserScript manager should detect it
 automatically and prompt you to install it. If it doesn't open on its own,
-open your userscript manager's dashboard and use **Create a new script** /
+open your UserScript manager's dashboard and use **Create a new script** /
 **Import**, then paste in the file's contents.
 
 ### 3. Confirm it's enabled
 
-Open your userscript manager's dashboard and make sure **Discord Custom
+Open your UserScript manager's dashboard and make sure **Discord Custom
 Badges** is toggled on and matches `discord.com`.
 
 ### 4. Reload Discord
@@ -67,7 +80,7 @@ Refresh any open Discord tabs (`Ctrl/Cmd + R`) so the script can inject.
 ## Usage
 
 - Open the in-page **Dashboard** (a button/icon is injected into Discord's UI) to manage everything  badge image/name, slots, presets, packs, behavior, and the Style Studio.
-- Your badge is stored server-side, keyed to your Discord user ID, so it follows you across devices as long as the script is installed and enabled in your userscript manager.
+- Your badge is stored server-side, keyed to your Discord user ID, so it follows you across devices as long as the script is installed and enabled in your UserScript manager.
 - **My Badges** lets you keep multiple saved looks and switch which one is live without re-entering the image/description each time.
 - **Badge Packs** let you import a themed set of badges from a raw GitHub URL, or copy your own badges out as JSON to share.
 
@@ -120,7 +133,7 @@ server-side, and you'll need to verify again to get a new one.
 
 ## License
 
-This userscript is distributed under **GPL-3.0-or-later**. You're free to
+This UserScript is distributed under **GPL-3.0-or-later**. You're free to
 use, study, modify, and share it, but if you distribute a modified
 version, you must also make its source available under the same license.
 See the full license text at https://www.gnu.org/licenses/gpl-3.0.html.
